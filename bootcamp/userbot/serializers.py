@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Lesson, Teacher_lesson, Day_lesson
+from .models import Lesson, Teacher_lesson, Day_lesson, Question, Answer
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -16,3 +16,17 @@ class Day_lessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Day_lesson
         fields = ('day', 'time_from', 'time_to', 'lesson', 'comments')        
+
+
+class UserQuestionSerializerPost(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = ('tg_name', 'question', 'answered')
+
+
+class UserAnswerSerializerPost(serializers.ModelSerializer):
+
+    class Meta:
+        model = Answer
+        fields = ('question', 'answer', 'answer_date')

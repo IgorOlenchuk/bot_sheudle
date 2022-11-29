@@ -28,3 +28,9 @@ def user_get(request, pk):
 def user_ids_list(request):
     users = TelegramUser.objects.all()
     return Response(data=users.values_list('id', flat=True))
+
+
+@api_view(['GET'])
+def user_respondents_list(request):
+    users = TelegramUser.objects.filter(is_respondent=True)
+    return Response(data=users.values_list('id', flat=True))
