@@ -168,15 +168,22 @@ async def callback_shedule(callback_query: types.CallbackQuery, callback_data: d
         a = 'Пятницу'
     await callback_query.message.delete()
     await bot.send_message(user_id, text=f'🗓Расписание на <strong>{a}</strong>')
+    lessons = []
     for day in days_list:
         lesson = str()
         lesson = lesson.join(day['lesson'].split(',')[-3])
         add = str()
         add = add.join(day['lesson'].split(',')[-1])
         if add != "доп.":
-            await bot.send_message(user_id, text=message.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson))
+            text=message.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson)
+            lessons.append(text)
+            # await bot.send_message(user_id, text=message.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson))
         else:
-            await bot.send_message(user_id, text=mesadd.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson))
+            text=mesadd.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson)
+            lessons.append(text)
+            # await bot.send_message(user_id, text=mesadd.format(time_from=day['time_from'][:-3], time_to=day['time_to'][:-3], lesson=lesson))
+    mes_bot = '\n'.join(lessons)
+    await bot.send_message(user_id, text=mes_bot)
     
 
 async def callback_cancel(call: types.CallbackQuery):
