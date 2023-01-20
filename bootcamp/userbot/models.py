@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Teacher_lesson(models.Model):
 
     teacher = models.CharField(max_length=150, null=True, blank=True, verbose_name='Учитель')
@@ -8,11 +9,12 @@ class Teacher_lesson(models.Model):
     
     class Meta:
         ordering = ('teacher',)
-        verbose_name = 'Учител'
+        verbose_name = 'Учитель'
         verbose_name_plural = 'Учителя'
 
     def __str__(self):
         return self.teacher
+
 
 class Lesson(models.Model):
 
@@ -26,6 +28,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f'{self.lesson},{self.teacher},{self.comments}'
+
 
 class Day_lesson(models.Model):
     
